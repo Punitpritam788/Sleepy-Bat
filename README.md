@@ -1,732 +1,559 @@
-# 🦇 Sleepy Bat
+# 🦇 SLEEPY BAT
 
 <p align="center">
-  <strong>FLAP INTO THE DARK — I NEED SOME SLEEP.</strong>
+  <img src="https://img.shields.io/badge/🦇-SLEEPY%20BAT-6E2CA8?style=for-the-badge" alt="Sleepy Bat">
+  <img src="https://img.shields.io/badge/STATUS-IN%20DEVELOPMENT-8B5CF6?style=for-the-badge" alt="Status">
 </p>
 
 <p align="center">
-  A dark, pixel-styled, rage-inducing arcade survival game where <strong>your movement controls your vision</strong>.
+  <strong>FLAP INTO THE DARK.</strong><br>
+  <em>I just want some sleep.</em>
 </p>
 
 <p align="center">
-
-![HTML5](https://img.shields.io/badge/HTML5-Canvas-E34F26?style=for-the-badge\&logo=html5\&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-Game%20Logic-F7DF1E?style=for-the-badge\&logo=javascript\&logoColor=black)
-![Unity](https://img.shields.io/badge/Unity-6.x-000000?style=for-the-badge\&logo=unity\&logoColor=white)
-![C%23](https://img.shields.io/badge/C%23-Gameplay-239120?style=for-the-badge\&logo=csharp\&logoColor=white)
-![Web](https://img.shields.io/badge/Platform-Web-4285F4?style=for-the-badge\&logo=googlechrome\&logoColor=white)
-![Windows](https://img.shields.io/badge/Platform-Windows-0078D6?style=for-the-badge\&logo=windows\&logoColor=white)
-![Android](https://img.shields.io/badge/Platform-Android-3DDC84?style=for-the-badge\&logo=android\&logoColor=white)
-
+  A dark arcade survival game where <strong>your movement controls your vision.</strong>
 </p>
 
 <p align="center">
-
-**HTML5 Web Build** • **Windows EXE** • **Android APK** • **Responsive Gameplay** • **Pixel Rendering** • **Procedural Audio**
-
+  <a href="#-play">🎮 Play</a> •
+  <a href="#-features">✨ Features</a> •
+  <a href="#-gameplay">🦇 Gameplay</a> •
+  <a href="#-technology">🛠️ Technology</a> •
+  <a href="#-downloads">⬇️ Downloads</a>
 </p>
 
 ---
 
-## 🌙 What Is Sleepy Bat?
+## 🌑 THE IDEA
 
-**Sleepy Bat** is a fast-paced arcade survival game inspired by the simple-to-learn, difficult-to-master design of classic one-button games — but with a much darker twist.
+Most arcade games give you a clear view of the obstacles.
 
-You play as a sleepy little bat flying through a dangerous cave.
+**Sleepy Bat doesn't.**
 
-The catch?
+Your bat uses echolocation.
 
-### 🦇 When the bat rises, the cave disappears.
+When it rises, the darkness takes over.
 
-### 👁️ When the bat falls, echolocation reveals the danger.
+When it falls, the cave briefly reveals itself.
 
-That means your own movement becomes part of the difficulty.
+So every flap changes not only your position...
 
-Every flap can change what you can see.
-
-Every descent can reveal a pillar exactly when you least want it.
-
-And once the game enters **RAGE MODE**, the cave starts fighting back.
-
-> **"I just wanna sleep."**
+### it changes what you can see.
 
 ---
 
-# 🎮 Gameplay
+## 🎬 GAMEPLAY
 
-The objective is brutally simple:
+<p align="center">
+  <!-- Replace with your gameplay GIF -->
+  <img src="Screenshots/gameplay.gif" alt="Sleepy Bat Gameplay" width="85%">
+</p>
 
-**Fly. Survive. Pass pillars. Increase your score. Don't hit anything.**
-
-The longer you survive, the more unpredictable the environment becomes.
-
-The game combines:
-
-* 🦇 One-button flying
-* 👁️ Echolocation-style visibility
-* 🪨 Randomized cave pillars
-* 🔄 Moving pillars
-* 🎯 Last-second gap shifts
-* 📉 Increasing difficulty
-* ⚡ Control glitches
-* 💢 Gravity pressure pulses
-* 💀 Death animations
-* 💥 Death particles
-* 📳 Screen shake
-* 🔊 Procedural sound effects
-* 🏆 Local high-score tracking
-* 😈 Rage-game taunts
+<p align="center">
+  <sub>🎥 Replace the image above with a gameplay GIF or short gameplay clip.</sub>
+</p>
 
 ---
 
-# 👁️ Core Mechanic — Echolocation
-
-The main gameplay mechanic of **Sleepy Bat** is its visibility system.
-
-Instead of keeping the obstacles permanently visible, the game uses the bat's vertical movement to determine whether the environment should be revealed.
-
-### 🪽 While the bat is rising
-
-The cave obstacles become hidden.
-
-The pillars and their caps effectively vanish from view.
-
-You are flying partially blind.
-
-### 🦇 While the bat is falling
-
-The bat enters its **echo/sonar state**.
-
-The pillars become visible again using a rapid flickering appearance rather than a smooth fade.
-
-This creates a gameplay loop where:
+## ⚡ GAMEPLAY LOOP
 
 ```text
-FLAP
-  ↓
-OBSTACLES DISAPPEAR
-  ↓
-FALL
-  ↓
-ECHLOCATION REVEALS THE CAVE
-  ↓
-REACT
-  ↓
-FLAP AGAIN
-```
-
-The visibility threshold itself scales with progression, making the mechanic become less predictable as the score increases.
-
----
-
-# 🪨 Dynamic Pillar System
-
-Sleepy Bat does not rely on completely static obstacles.
-
-The pillar system contains several layers of randomness and movement.
-
-### Random pillar generation
-
-Each pillar receives randomized:
-
-* Horizontal spacing
-* Vertical gap position
-* Gap size
-* Movement phase
-* Drift amount
-* Drift speed
-* Jump timing
-
-The game also has a chance to create **joined / closely spaced pillar patterns**, reducing the amount of recovery space between obstacles.
-
-### Continuous vertical drift
-
-Some pillars continuously move using a smooth oscillating motion.
-
-Instead of instantly teleporting, the pillar gradually follows its randomized target position.
-
-### Fake-out movement
-
-The game contains multiple last-second movement events.
-
-A pillar can:
-
-1. Move before the bat reaches it.
-2. Perform a second smaller movement closer to the player.
-3. Smoothly animate between positions instead of instantly teleporting.
-
-So even when you think you understand the gap...
-
-> **THE GAP MOVED.**
-
----
-
-# 📈 Difficulty System
-
-The difficulty is not simply increased by making everything faster.
-
-Multiple gameplay variables scale with the score.
-
-### Gap Size
-
-The safe opening becomes smaller as the score increases.
-
-```text
-Higher Score
-      ↓
-Smaller Gap
-      ↓
-Less Recovery Space
-```
-
-### Movement Speed
-
-Pillar movement gradually becomes faster.
-
-### Joined Obstacles
-
-Higher scores increase the probability of tighter pillar sequences.
-
-### Movement Probability
-
-Moving-pillar behavior becomes more common at higher score ranges.
-
-### Pressure Events
-
-After reaching a certain score, temporary gravity pressure pulses can appear.
-
-During these moments:
-
-```text
-Normal Gravity
-      ↓
-Temporary Gravity Increase
-      ↓
-The Same Flap Timing Suddenly Feels Wrong
-```
-
-That's where the rage begins.
-
----
-
-# ⚡ Rage Mechanics
-
-Sleepy Bat intentionally contains mechanics designed to create unpredictable moments.
-
-## 1. Retry Troll
-
-After death, there is a chance that the first retry input will be rejected.
-
-The game may respond with:
-
-> **LOL. NO.**
-
-This is intentionally unfair-looking behavior designed to make the player question what just happened.
-
----
-
-## 2. Flap Glitch
-
-At random intervals, a temporary control glitch can activate.
-
-Two possible states can occur:
-
-### `WEAK`
-
-Your flap becomes significantly weaker.
-
-### `INVERTED`
-
-The flap direction is temporarily altered.
-
-The game also displays an event message so the player knows something strange is happening.
-
----
-
-## 3. Gravity Pressure
-
-At higher scores, temporary gravity pulses can make the bat fall faster.
-
-This creates situations where a familiar timing pattern suddenly stops working.
-
----
-
-# 💀 Death System
-
-Death is treated as an event rather than simply stopping the game.
-
-When the bat dies, the game can trigger:
-
-* 🖼️ Dedicated death frame
-* 💥 Particle burst
-* 📳 Screen shake
-* 🔊 Death sound
-* 💬 Random death taunt
-* 🧮 Death counter
-* 🏆 Best-score update
-
-The death frame immediately replaces the normal flying animation after impact.
-
-### Example death messages
-
-```text
-missed it by THAT much
-the gap moved. definitely.
-that felt rigged. it was.
-so close, right?
-
-gravity said no
-skill issue
-you flinched.
-physics is fake
-```
-
-And when the maximum score is reached:
-
-```text
-999. THAT'S IT. THAT'S ALL YOU GET.
+                🦇 FLAP
+                   │
+                   ▼
+          🌑 CAVE DISAPPEARS
+                   │
+                   ▼
+             FALL THROUGH
+                   │
+                   ▼
+          👁️ ECHO REVEALS
+          THE OBSTACLES
+                   │
+                   ▼
+             🪨 REACT FAST
+                   │
+                   ▼
+              ✅ SURVIVE
+                   │
+                   ▼
+             📈 SCORE UP
+                   │
+                   └───────────────┐
+                                   │
+                              DO IT AGAIN
 ```
 
 ---
 
-# 🏆 Score System
+# ✨ FEATURES
 
-Every successfully passed pillar increases the score.
+<table>
+<tr>
+<td width="50%">
 
-The game keeps track of:
+### 🦇 Echolocation
 
-```text
-SCORE
-BEST SCORE
-TOTAL DEATHS
-```
+Your vertical movement controls obstacle visibility.
 
-The score progression also drives the difficulty system.
+### 🪨 Dynamic Pillars
 
-The current browser implementation stores the statistics using:
+Pillars can spawn at different positions and move during gameplay.
 
-```text
-localStorage
-```
+### 🎯 Moving Gaps
 
-The Unity version uses:
+The safe opening isn't always where you expect it to be.
 
-```text
-PlayerPrefs
-```
+### ⚡ Glitch Events
 
-So your best score and death count can persist between sessions.
+Temporary gameplay disruptions can alter your flap behavior.
+
+</td>
+
+<td width="50%">
+
+### 💀 Rage Deaths
+
+Death comes with animation, particles, shake and taunts.
+
+### 🏆 Persistent Score
+
+Best score and death statistics are stored locally.
+
+### 🔊 Procedural Audio
+
+Gameplay sounds can be generated at runtime.
+
+### 📱 Multi-Platform
+
+Built for Web, Windows and Android.
+
+</td>
+</tr>
+</table>
 
 ---
 
-# 🕹️ Controls
+# 🧠 THE MAIN MECHANIC
 
-## 💻 Windows / PC
+## 👁️ Echo Visibility
 
-| Input         | Action            |
-| ------------- | ----------------- |
-| `SPACE`       | Flap              |
-| `ARROW UP`    | Flap              |
-| `Mouse Click` | Flap              |
-| `ESC`         | Pause / Exit flow |
+The most important mechanic in Sleepy Bat is the relationship between **vertical velocity and visibility**.
+
+```text
+                    FLAP ↑
+                      │
+                      ▼
+              ┌─────────────┐
+              │  RISING     │
+              │             │
+              │  🌑 DARK    │
+              │             │
+              └─────────────┘
+                      │
+                      ▼
+                FALLING ↓
+                      │
+                      ▼
+              ┌─────────────┐
+              │ ECHO MODE   │
+              │             │
+              │ 🪨 👁️ 🪨    │
+              │ OBSTACLES   │
+              │ REVEALED    │
+              └─────────────┘
+```
+
+The result is a timing game where:
+
+> **You are not only controlling the bat.
+> You are controlling your information.**
+
+---
+
+# 🪨 DYNAMIC PILLARS
+
+The cave isn't built from perfectly static obstacles.
+
+Pillars can use:
+
+* Random horizontal spacing
+* Random vertical placement
+* Variable gap sizes
+* Closely-spaced obstacle patterns
+* Smooth vertical movement
+* Last-second gap adjustments
+* Progressive movement difficulty
+
+This means memorizing a single obstacle pattern won't save you.
+
+### The gap can move.
+
+And yes...
+
+> **It probably wasn't moving five seconds ago.**
+
+---
+
+# 😈 RAGE SYSTEM
+
+Sleepy Bat intentionally introduces moments that can disrupt your rhythm.
+
+### ⚡ Flap Glitch
+
+A temporary glitch can modify the normal flap response.
+
+### 🔥 Gravity Pressure
+
+At higher difficulty, gravity can become more aggressive.
+
+### 🃏 Retry Troll
+
+The game can occasionally mess with the first retry interaction after death.
+
+### 📺 Visual Glitches
+
+Temporary visual effects can warn you that something is about to go wrong.
+
+The goal isn't to make the game impossible.
+
+The goal is to make you say:
+
+> **"WHAT JUST HAPPENED?"**
+
+---
+
+# 💀 DEATH IS PART OF THE GAME
+
+When the bat dies, the game doesn't simply stop.
+
+A death event can trigger:
+
+```text
+💥 Particle Burst
+      +
+📳 Screen Shake
+      +
+🦇 Death Frame
+      +
+🔊 Death Sound
+      +
+💬 Random Taunt
+      +
+☠️ Death Counter
+      +
+🏆 Score Check
+```
+
+Example reactions:
+
+```text
+"missed it by THAT much"
+
+"the gap moved. definitely."
+
+"that felt rigged. it was."
+
+"so close, right?"
+
+"gravity said no"
+
+"skill issue"
+
+"you flinched."
+
+"physics is fake"
+```
+
+---
+
+# 🏆 SCORE SYSTEM
+
+Every successfully cleared obstacle increases the score.
+
+The game tracks:
+
+| Statistic | Purpose             |
+| --------- | ------------------- |
+| 🎯 Score  | Current run         |
+| 🏆 Best   | Highest saved score |
+| 💀 Deaths | Total deaths        |
+
+The Unity implementation persists gameplay statistics using `PlayerPrefs`, while the standalone web implementation uses browser-side storage.
+
+---
+
+# 🎮 CONTROLS
+
+## 💻 PC
+
+| Input        | Action          |
+| ------------ | --------------- |
+| `SPACE`      | 🦇 Flap         |
+| `↑ UP`       | 🦇 Flap         |
+| `LEFT CLICK` | 🦇 Flap         |
+| `ESC`        | ⏸️ Pause / Exit |
 
 ## 📱 Android
 
-| Input                        | Action            |
-| ---------------------------- | ----------------- |
-| `Tap`                        | Flap              |
-| `System Back / Back Gesture` | Pause / Exit flow |
+| Input  | Action          |
+| ------ | --------------- |
+| `TAP`  | 🦇 Flap         |
+| `BACK` | ⏸️ Pause / Exit |
 
-### Pause / Exit behavior
-
-The Unity version implements an intentionally simple back-button system:
-
-```text
-Active Game
-    ↓
-Back / ESC
-    ↓
-Pause / Exit Screen
-    ↓
-Tap / Space / Up
-    ↓
-Fresh Run
-```
-
-A second Back / ESC input while the pause screen is open exits the application.
+The Unity version routes Escape/back handling through its pause/exit logic and supports restarting from the pause screen as a fresh run.
 
 ---
 
-# 🧠 Technical Architecture
+# 🛠️ TECHNOLOGY
 
-Sleepy Bat currently has **two implementations**.
-
-## 🌐 HTML5 Version
-
-The standalone browser build uses:
+## 🌐 HTML5 VERSION
 
 ```text
-HTML
-CSS
-JavaScript
-HTML5 Canvas
-Web Audio API
-Pointer Events
-Keyboard Events
-localStorage
-requestAnimationFrame
+HTML5
+├── Canvas
+├── JavaScript
+├── CSS
+├── Web Audio API
+├── Keyboard Input
+├── Touch / Pointer Input
+└── Browser Storage
 ```
 
-The game renders directly onto an HTML `<canvas>` and uses a pixel-oriented visual presentation.
-
-The canvas is configured for full-screen responsive rendering with pixelated image scaling.
-
-### Browser rendering pipeline
-
-```text
-Input
-  ↓
-Game State
-  ↓
-Physics
-  ↓
-Pillar Simulation
-  ↓
-Collision Detection
-  ↓
-Visibility / Echo State
-  ↓
-Canvas Rendering
-  ↓
-requestAnimationFrame
-```
-
-The browser build also embeds its artwork directly into the HTML file, allowing the game to start without waiting for external image loading.
+The HTML version is designed as a self-contained browser game with a full-screen canvas and pixel-oriented rendering.
 
 ---
 
-# 🛠️ Unity Version
-
-The Unity implementation is designed around a real runtime scene rather than relying on GUI-only rendering.
-
-The project dynamically creates a scene hierarchy containing:
+## 🎮 UNITY VERSION
 
 ```text
-Main Camera
-Background
-Ground
-Top Cave Layer
-Pillars
-Bird
-HUD Canvas
-Particle System
-Audio Sources
-Glitch Overlay
+Unity 6.x
+├── C#
+├── SpriteRenderer
+├── GameObjects
+├── Canvas UI
+├── ParticleSystem
+├── AudioSource
+├── Procedural Audio
+├── PlayerPrefs
+└── Orthographic Camera
 ```
 
-The Unity version uses:
-
-* Unity 6.x
-* C#
-* `SpriteRenderer`
-* `Canvas`
-* `Text`
-* `CanvasScaler`
-* `ParticleSystem`
-* `AudioSource`
-* `AudioClip`
-* `PlayerPrefs`
-* Runtime `GameObject` creation
-
-The project creates its actual visual objects at runtime, allowing the scene hierarchy to contain real game objects and sprite renderers instead of relying entirely on an `OnGUI` drawing approach.
+The Unity implementation builds an actual runtime hierarchy containing the camera, sprite layers, pillars, particles, HUD and audio components.
 
 ---
 
-# 🎨 Sprite-Based Rendering
+# 🧩 UNITY ARCHITECTURE
 
-Game artwork is handled through sprites.
+The runtime scene is structured approximately like this:
+
+```text
+FlapScene
+│
+├── Main Camera
+│
+├── Background_A
+├── Background_B
+│
+├── Ground_A
+├── Ground_B
+│
+├── Top_A
+├── Top_B
+│
+├── GlitchOverlay
+│
+├── Bird
+│
+├── Pillar_0
+│   ├── TopBody
+│   ├── TopCap
+│   ├── BotBody
+│   └── BotCap
+│
+├── Pillar_1
+├── Pillar_2
+├── ...
+│
+├── DeathBurst
+│
+└── HUD Canvas
+    ├── Score
+    ├── Best
+    ├── Deaths
+    ├── Warning
+    └── Echo
+```
+
+The project uses a reusable pillar pool and creates the visual runtime objects directly through Unity's normal sprite pipeline.
+
+---
+
+# 🎨 SPRITE & ANIMATION SYSTEM
 
 The Unity implementation supports sprite arrays for:
 
 ```text
-Background Animation
-Bird Animation
-Pillar Animation
-Pillar Cap Animation
-Ground Animation
-Top Cave Animation
-Death Frame
+🖼️ Background Frames
+🦇 Bird Frames
+💀 Death Frame
+🪨 Pillar Frames
+🔺 Pillar Cap Frames
+🪨 Ground Frames
+⬆️ Top Cave Frames
 ```
 
-The system can use a single sprite for a static image or multiple sprites for frame-based animation.
-
-Animation speed is configurable through:
-
-```text
-animationFps
-```
+A single sprite can be used as a static image, while multiple sprites can be cycled as animation frames.
 
 ---
 
-# 📐 Responsive Pixel Scaling
+# 📐 RESPONSIVE RENDERING
 
-The game uses a reference-resolution approach so gameplay values can remain consistent across different screen sizes.
-
-The Unity implementation uses:
+The Unity version uses a pixel-oriented world-space convention with an orthographic camera.
 
 ```text
-Reference Height = 900 pixels
+Screen Size
+    ↓
+Scale Calculation
+    ↓
+World Position
+    ↓
+Sprite Size
+    ↓
+Responsive Gameplay
 ```
 
-and calculates a scale factor from the current screen height.
-
-The world-space setup uses the convention:
-
-```text
-1 Unity world unit ≈ 1 pixel
-```
-
-with an orthographic camera.
-
-This allows gameplay values such as:
-
-* gravity
-* player size
-* pillar size
-* movement speed
-* collision padding
-* gap distances
-
-to scale with the display.
+The implementation calculates a screen-dependent scale factor and converts screen coordinates into world positions so gameplay values remain consistent across different display sizes.
 
 ---
 
-# 🪨 Texture-Based Cave Collision
+# 🪨 TEXTURE-BASED COLLISION
 
-One of the more interesting technical systems is the cave collision profile.
+The cave isn't required to behave like a simple rectangular floor and ceiling.
 
-Instead of simply assuming that the ground and ceiling are flat rectangles, the Unity implementation can build a height profile directly from the alpha information of the cave texture.
-
-Conceptually:
+The Unity version can analyse the alpha information of the cave textures and build a sampled height profile.
 
 ```text
 Cave Texture
      ↓
-Read Alpha Pixels
+Read Pixels
      ↓
-Sample Horizontal Positions
+Analyse Alpha
      ↓
-Build Height Profile
+Create Height Profile
      ↓
-Sample Collision Height During Gameplay
+Sample During Collision
 ```
 
-This allows irregular cave artwork to influence collision behavior.
-
-If the texture cannot be read, the implementation falls back to simpler flat collision behavior.
+This allows irregular artwork to participate in the collision system.
 
 ---
 
-# 🎥 Scrolling & Parallax
+# 🔊 PROCEDURAL AUDIO
 
-The cave uses independent scrolling layers.
+The Unity version generates short sound effects dynamically instead of requiring a separate audio asset for every simple interaction.
 
-The project separates:
+Generated effects include:
 
 ```text
-Background
-Ground
-Top Cave
-Pillars
+🦇 Flap
+⚡ Glitch Flap
+✅ Pass
+💀 Death
+⚠️ Glitch Warning
+😈 Troll
+😴 Sleepy
 ```
 
-and assigns different movement speeds.
-
-This produces a simple layered parallax effect while maintaining the arcade-game feel.
-
-The browser implementation also uses continuous scrolling and wraps the scene for an endless-run effect.
+The implementation generates waveform-based `AudioClip` data at runtime.
 
 ---
 
-# 🔊 Procedural Audio
+# 🌌 SCROLLING & PARALLAX
 
-Rather than requiring a large collection of external sound files, both implementations include lightweight procedural sound generation concepts.
-
-### Unity
-
-The Unity version creates audio clips at runtime using synthesized waveforms such as:
-
-* Sine
-* Triangle
-* Saw
-* Square
-
-Different frequencies and durations are mapped to gameplay events.
-
-Examples include:
+Multiple environmental layers move at different speeds:
 
 ```text
-Flap
-Glitch Flap
-Pass
-Death
-Glitch Warning
-Rage Troll
-Sleepy / Special Death
+Background  → Slow
+Top Cave    → Medium
+Ground      → Fast
+Pillars     → Gameplay Speed
 ```
 
-### HTML5
+This creates the perception of movement without requiring a fully 3D environment.
 
-The browser implementation uses the Web Audio API and creates short oscillator-based sound effects dynamically.
-
-This keeps the audio system lightweight and highly controllable.
+The Unity implementation uses paired sprite layers to create a continuous scrolling loop.
 
 ---
 
-# 💥 Particle Effects
+# 📈 DIFFICULTY SYSTEM
 
-Death creates a small burst effect.
+Difficulty is driven by the score.
 
-The Unity version uses a `ParticleSystem` for the death burst.
-
-The browser version uses lightweight manually simulated particles.
-
-The effect is intentionally short and arcade-like:
+As the player progresses:
 
 ```text
-Collision
-   ↓
-Death State
-   ↓
-Burst
-   ↓
-Screen Shake
-   ↓
-Death Frame
-   ↓
-Death Message
+SCORE ↑
+  │
+  ├── GAP ↓
+  ├── SPEED ↑
+  ├── MOVEMENT ↑
+  ├── REACTION TIME ↓
+  └── RAGE EVENTS ↑
 ```
+
+The Unity gameplay logic calculates score-dependent gap size, movement speed and flying thresholds rather than using a single fixed difficulty value.
 
 ---
 
-# 📊 Game State Design
+# 🧪 DEVELOPMENT
 
-The game maintains a compact state machine around several important states:
+The project was built around experimentation with:
 
-```text
-TITLE
-  ↓
-RUNNING
-  ↓
-DEAD
-  ↓
-RETRY
-```
+* 2D gameplay programming
+* Procedural systems
+* Runtime scene construction
+* Sprite-based animation
+* Collision sampling
+* Responsive scaling
+* Procedural sound synthesis
+* Particle effects
+* Persistent game statistics
+* Cross-platform input
 
-The Unity version additionally includes:
-
-```text
-PAUSED / EXIT SCREEN
-```
-
-Important state variables include:
-
-```text
-running
-dead
-score
-best
-deaths
-pausedForExit
-gameTime
-scrollTime
-glitchUntil
-glitchInvert
-trollBlock
-echoVisible
-```
-
-This keeps gameplay behavior deterministic and makes the different rage mechanics easier to manage.
+The Unity implementation also includes a development reset for saved score/death statistics.
 
 ---
 
-# 🧮 Core Gameplay Formulae
+# 📦 BUILDS
 
-The game uses score-driven functions rather than hardcoding a single difficulty level.
-
-### Gap
-
-```text
-gap = max(minimumGap, baseGap - score × scaling)
-```
-
-### Speed
-
-```text
-speed = baseSpeed + progressiveScoreBonus
-```
-
-### Echo Threshold
-
-The visibility state depends on the bat's vertical velocity.
-
-```text
-falling faster
-      ↓
-echo becomes active
-      ↓
-pillars revealed
-```
-
-### Pillar Movement
-
-Pillars combine:
-
-```text
-Random Spawn
-+
-Smooth Drift
-+
-Pre-Contact Fake-Out
-+
-Last-Second Fake-Out
-```
-
-This produces an obstacle system that feels alive instead of purely procedural in a predictable way.
+| Version | Technology         | Platform |
+| ------- | ------------------ | -------- |
+| 🌐 Web  | HTML5 + JavaScript | Browser  |
+| 🖥️ EXE | Unity 6.x + C#     | Windows  |
+| 📱 APK  | Unity 6.x + C#     | Android  |
 
 ---
 
-# 🧩 Performance-Oriented Techniques
+# 🚀 PLAY / DOWNLOAD
 
-The project is designed around lightweight real-time game techniques rather than heavy systems.
+## 🌐 PLAY ONLINE
 
-### Object pooling
+**[▶️ PLAY SLEEPY BAT](YOUR-GITHUB-PAGES-LINK)**
 
-The Unity implementation creates a reusable pillar pool instead of continuously creating unlimited pillar objects.
+## 🖥️ WINDOWS
 
-### Two-panel scrolling
+**[⬇️ DOWNLOAD EXE](YOUR-GITHUB-RELEASE-LINK)**
 
-Background-style layers use paired sprites that continuously reposition to create an endless scrolling loop.
+## 📱 ANDROID
 
-### Lightweight particles
+**[⬇️ DOWNLOAD APK](YOUR-GITHUB-RELEASE-LINK)**
 
-Death particles are kept small and short-lived.
-
-### Procedural audio
-
-Short runtime-generated tones eliminate the need for a large collection of sound assets.
-
-### Responsive rendering
-
-The game calculates display scaling instead of rendering at one fixed gameplay size.
-
-### Standalone browser build
-
-The HTML version embeds artwork directly into the file, helping keep the demo self-contained.
+> Replace the placeholder links above with your final GitHub Pages and Releases URLs.
 
 ---
 
-# 📁 Suggested Repository Structure
+# 📁 REPOSITORY
 
 ```text
 Sleepy-Bat/
@@ -736,383 +563,109 @@ Sleepy-Bat/
 ├── Web/
 │   └── SleepyBat_DeathFrame_Caps180.html
 │
+├── Unity/
+│   ├── Assets/
+│   ├── Packages/
+│   └── ProjectSettings/
+│
 ├── Windows/
 │   └── SleepyBat.exe
 │
 ├── Android/
 │   └── SleepyBat.apk
 │
-├── Unity/
-│   ├── Assets/
-│   ├── Packages/
-│   ├── ProjectSettings/
-│   └── ...
-│
 └── Screenshots/
     ├── gameplay.png
-    ├── death-screen.png
     ├── echo-mode.png
-    └── rage-mode.png
+    ├── rage-mode.png
+    └── death-screen.png
 ```
-
-> You can change the folder names to match your final GitHub repository structure.
 
 ---
 
-# 🚀 Running the HTML Version
+# 🎯 DESIGN PHILOSOPHY
 
-The browser version is designed as a standalone HTML game.
+Sleepy Bat follows one simple rule:
 
-You can simply open:
+### **Easy to understand. Hard to survive.**
+
+You only need one main action:
 
 ```text
-SleepyBat_DeathFrame_Caps180.html
+               FLAP
+                ↓
+        ┌──────────────┐
+        │              │
+        │   SURVIVE    │
+        │              │
+        └──────────────┘
+                ↓
+              DIE
+                ↓
+             RETRY
 ```
 
-in a modern browser.
-
-Recommended browsers:
-
-* Google Chrome
-* Microsoft Edge
-* Firefox
-* Chromium-based browsers
-
-For hosting, the same HTML file can be deployed through:
-
-* GitHub Pages
-* Netlify
-* Vercel
-* Any static web server
+The complexity comes from what happens **around** that button.
 
 ---
 
-# 🖥️ Windows Build
+# 🦇 WHY A SLEEPY BAT?
 
-The Unity project can be exported as a Windows executable.
+Because this bat doesn't want to become a hero.
 
-Typical release structure:
+It doesn't want treasure.
 
-```text
-Windows/
-├── SleepyBat.exe
-├── SleepyBat_Data/
-├── UnityPlayer.dll
-└── ...
-```
+It doesn't want adventure.
 
-The exact folder contents depend on the Unity build configuration.
-
----
-
-# 📱 Android Build
-
-The Unity project can also be exported as an Android APK.
-
-```text
-Android/
-└── SleepyBat.apk
-```
-
-The gameplay input system supports touch input, while Android's Back input is routed into the game's pause/exit behavior.
-
----
-
-# 🏗️ Build Targets
-
-| Build   | Technology                  | Target  |
-| ------- | --------------------------- | ------- |
-| 🌐 Web  | HTML5 + JavaScript + Canvas | Browser |
-| 🖥️ EXE | Unity 6.x + C#              | Windows |
-| 📱 APK  | Unity 6.x + C#              | Android |
-
----
-
-# 🧪 Development Features
-
-The Unity implementation also contains development-oriented functionality, including:
-
-* Runtime scene construction
-* Debug logging
-* Persistent score statistics
-* Development reset functionality
-* Dynamic object creation
-* Runtime collision profile generation
-* Configurable animation settings
-* Configurable pillar dimensions
-* Configurable scroll speeds
-* Safe display scaling
-
-A development `F9` reset is included in the Unity implementation for clearing saved best/death statistics while testing.
-
----
-
-# 🎯 Design Philosophy
-
-Sleepy Bat is intentionally built around **simple controls + unpredictable consequences**.
-
-The player only really needs one primary action:
-
-```text
-FLAP
-```
-
-But that one action affects:
-
-```text
-Vertical velocity
-        ↓
-Echo visibility
-        ↓
-Obstacle readability
-        ↓
-Reaction timing
-        ↓
-Survival
-```
-
-The game therefore turns a very simple control scheme into a layered timing challenge.
-
----
-
-# 💜 Visual Direction
-
-The game's visual identity combines:
-
-* Dark cave environments
-* Purple / violet atmosphere
-* Pixel-oriented rendering
-* Minimal HUD
-* High-contrast character art
-* Flickering obstacle visibility
-* CRT-like / arcade-inspired presentation
-* Sleepy and humorous messaging
-
-The contrast between the cute sleepy bat and deliberately frustrating mechanics is a major part of the game's personality.
-
----
-
-# 😴 The Personality of the Game
-
-Sleepy Bat isn't supposed to feel like a perfectly polite arcade game.
-
-It's supposed to feel like the game itself is getting annoyed with you.
-
-You miss a pillar?
-
-> **"missed it by THAT much"**
-
-The gap changes?
-
-> **"the gap moved. definitely."**
-
-Gravity ruins your timing?
-
-> **"gravity said no"**
-
-You reach the maximum?
-
-> **"999. THAT'S IT. THAT'S ALL YOU GET."**
-
-The result is a game that treats failure as part of the entertainment.
-
----
-
-# 🧰 Technology Stack
-
-### Web Build
-
-```text
-HTML5
-CSS3
-JavaScript
-HTML5 Canvas
-Web Audio API
-Pointer Events
-Keyboard Events
-localStorage
-requestAnimationFrame
-```
-
-### Unity Build
-
-```text
-Unity 6.x
-C#
-SpriteRenderer
-Canvas UI
-ParticleSystem
-AudioSource
-AudioClip
-PlayerPrefs
-Runtime GameObjects
-Orthographic Camera
-```
-
----
-
-# ✨ Features At A Glance
-
-| Feature                            | Sleepy Bat |
-| ---------------------------------- | :--------: |
-| One-button gameplay                |      ✅     |
-| Touch support                      |      ✅     |
-| Keyboard support                   |      ✅     |
-| Responsive screen scaling          |      ✅     |
-| Echolocation mechanic              |      ✅     |
-| Hidden obstacles while rising      |      ✅     |
-| Flickering obstacles while falling |      ✅     |
-| Random pillar generation           |      ✅     |
-| Moving pillars                     |      ✅     |
-| Last-second fake-outs              |      ✅     |
-| Progressive difficulty             |      ✅     |
-| Gravity pressure events            |      ✅     |
-| Flap glitches                      |      ✅     |
-| Retry trolling                     |      ✅     |
-| Death frame                        |      ✅     |
-| Death particles                    |      ✅     |
-| Screen shake                       |      ✅     |
-| Procedural audio                   |      ✅     |
-| Persistent best score              |      ✅     |
-| Death counter                      |      ✅     |
-| Windows build                      |      ✅     |
-| Android build                      |      ✅     |
-| Browser build                      |      ✅     |
-
----
-
-# 📸 Screenshots & Media
-
-Add your screenshots here to make the repository more visual:
-
-```md
-## 📸 Screenshots
-
-<p align="center">
-  <img src="Screenshots/gameplay.png" width="45%">
-  <img src="Screenshots/echo-mode.png" width="45%">
-</p>
-
-<p align="center">
-  <img src="Screenshots/rage-mode.png" width="45%">
-  <img src="Screenshots/death-screen.png" width="45%">
-</p>
-```
-
-A short gameplay GIF or video is highly recommended for the repository's front page.
-
-Example:
-
-```md
-## 🎬 Gameplay
-
-![Sleepy Bat Gameplay](Screenshots/gameplay.gif)
-```
-
----
-
-# ▶️ Play / Download
-
-### 🌐 Play in Browser
-
-```text
-[ INSERT YOUR GITHUB PAGES / WEB DEMO LINK HERE ]
-```
-
-### 🖥️ Download Windows EXE
-
-```text
-[ INSERT YOUR WINDOWS RELEASE LINK HERE ]
-```
-
-### 📱 Download Android APK
-
-```text
-[ INSERT YOUR ANDROID APK RELEASE LINK HERE ]
-```
-
-For GitHub, the cleanest approach is to place the EXE and APK inside **GitHub Releases** rather than committing very large binaries directly into the repository.
-
----
-
-# 🛠️ Future Ideas
-
-Possible future expansions include:
-
-* More bat animations
-* Additional cave environments
-* More glitch events
-* New rage mechanics
-* Difficulty presets
-* More death animations
-* Additional sound effects
-* New particle effects
-* Cosmetic bat skins
-* Challenge modes
-* Endless score leaderboards
-* Achievement system
-* More platform builds
-
----
-
-# 🦇 Why "Sleepy Bat"?
-
-Because the bat doesn't want to save the world.
-
-It doesn't want to become a hero.
-
-It doesn't even want to fly.
-
-### It just wants to sleep.
+### It wants a nap.
 
 Unfortunately...
 
-**the cave has other plans.**
+**the cave wants violence.**
 
 ---
 
-# 👨‍💻 Project
-
-**Sleepy Bat** is an experimental arcade game project focused on combining simple gameplay mechanics with procedural systems, responsive rendering, visual feedback and deliberately frustrating game design.
-
-It was developed in two forms:
-
-```text
-HTML5 / JavaScript
-        +
-Unity 6.x / C#
-```
-
-The HTML version provides a lightweight standalone web implementation, while the Unity version provides a full game-engine implementation suitable for desktop and mobile builds.
-
----
-
-# ❤️ Built For Fun, Frustration & Sleep Deprivation
-
-If you survived long enough to read this README...
-
-you probably haven't survived **999**.
-
-Yet.
-
-## 🦇 FLAP.
-
-## 🌑 FALL.
-
-## 👁️ LISTEN.
-
-## 💀 DIE.
-
-## 🔁 TRY AGAIN.
-
-**I NEED SOME SLEEP.**
-
----
+# ❤️ MADE WITH
 
 <p align="center">
-  <strong>🦇 Sleepy Bat • Dark Arcade • Rage Game • Pixel Survival</strong>
+
+![Unity](https://img.shields.io/badge/Made%20with-Unity-000000?style=flat-square\&logo=unity\&logoColor=white)
+![CSharp](https://img.shields.io/badge/Gameplay-C%23-239120?style=flat-square\&logo=csharp\&logoColor=white)
+![JavaScript](https://img.shields.io/badge/Web-JavaScript-F7DF1E?style=flat-square\&logo=javascript\&logoColor=black)
+![HTML5](https://img.shields.io/badge/Web-HTML5-E34F26?style=flat-square\&logo=html5\&logoColor=white)
+![Canvas](https://img.shields.io/badge/Rendering-Canvas-6E2CA8?style=flat-square)
+![Android](https://img.shields.io/badge/Mobile-Android-3DDC84?style=flat-square\&logo=android\&logoColor=white)
+
 </p>
 
+---
+
+# 🦇 FINAL TRANSMISSION
+
+```text
+╔══════════════════════════════════════╗
+║                                      ║
+║        🦇  S L E E P Y  B A T       ║
+║                                      ║
+║              FLAP.                   ║
+║              FALL.                   ║
+║              ECHO.                   ║
+║              PANIC.                  ║
+║              DIE.                    ║
+║                                      ║
+║        "I NEED SOME SLEEP."          ║
+║                                      ║
+╚══════════════════════════════════════╝
+```
+
 <p align="center">
-  <sub>Built with HTML5 Canvas + JavaScript and Unity 6.x</sub>
+  <strong>🌑 Welcome to the cave.</strong><br>
+  <strong>🦇 Good luck.</strong><br>
+  <strong>💀 You're going to need it.</strong>
+</p>
+
+---
+
+<p align="center">
+  <sub>Sleepy Bat • Arcade Survival • Echolocation • Rage Game</sub>
 </p>
