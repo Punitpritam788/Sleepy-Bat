@@ -139,7 +139,8 @@ function spawn(prev){
     jumpTarget: center,
     jumpFrom: center,
     jumpTime: 0,
-    jumpDur: 0.18 + Math.random()*0.12
+    jumpDur: 0.18 + Math.random()*0.12,
+    moveSfxCooldown: 0
   });
 }
 function maybeSpawn(){const p=pillars[pillars.length-1];if(!p||p.x<W)spawn(p)}
@@ -147,16 +148,59 @@ function maybeSpawn(){const p=pillars[pillars.length-1];if(!p||p.x<W)spawn(p)}
 let audio=null;
 function beep(kind){
   try{
-    const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
-    if(!audio)audio=new AC();if(audio.state==="suspended")audio.resume();
-    const map={flap:[300,"triangle",.05,.06],pass:[540,"sine",.06,.08],die:[140,"sawtooth",.2,.25],warn:[90,"sawtooth",.1,.18],glitch:[180,"triangle",.04,.06]};
-    const d=map[kind]||map.flap,n=audio.currentTime,o=audio.createOscillator(),g=audio.createGain();
-    o.type=d[1];o.frequency.value=d[0];g.gain.setValueAtTime(.0001,n);
-    g.gain.exponentialRampToValueAtTime(d[2],n+.005);g.gain.exponentialRampToValueAtTime(.0001,n+d[3]);
-    o.connect(g).connect(audio.destination);o.start(n);o.stop(n+d[3]+.02);
+    const AC=window.AudioContext||window.webkitAudioContext;
+    if(!AC)return;
+    if(!audio)audio=new AC();
+    if(audio.state==="suspended")audio.resume();
+
+    const defs={
+      pass:[540,"sine",.055,.08],
+      die:[140,"sawtooth",.20,.25],
+      warn:[90,"sawtooth",.10,.18],
+      glitch:[180,"triangle",.04,.06],
+      move:[105,"triangle",.045,.12]
+    };
+    const d=defs[kind]||defs.pass;
+    const now=audio.currentTime;
+    const o=audio.createOscillator();
+    const g=audio.createGain();
+    o.type=d[1];
+    o.frequency.value=d[0];
+    g.gain.setValueAtTime(.0001,now);
+    g.gain.exponentialRampToValueAtTime(d[2],now+.006);
+    g.gain.exponentialRampToValueAtTime(.0001,now+d[3]);
+    o.connect(g).connect(audio.destination);
+    o.start(now);
+    o.stop(now+d[3]+.02);
   }catch(_){}
 }
 
+function playFlySfx(){
+  // Two tiny rising chirps make each flap sound like a bat wingbeat.
+  try{
+    const AC=window.AudioContext||window.webkitAudioContext;
+    if(!AC)return;
+    if(!audio)audio=new AC();
+    if(audio.state==="suspended")audio.resume();
+
+    const now=audio.currentTime;
+    const chirp=(freq,offset,dur,vol)=>{
+      const o=audio.createOscillator();
+      const g=audio.createGain();
+      o.type="triangle";
+      o.frequency.setValueAtTime(freq,now+offset);
+      o.frequency.exponentialRampToValueAtTime(freq*1.28,now+offset+dur);
+      g.gain.setValueAtTime(.0001,now+offset);
+      g.gain.exponentialRampToValueAtTime(vol,now+offset+.008);
+      g.gain.exponentialRampToValueAtTime(.0001,now+offset+dur);
+      o.connect(g).connect(audio.destination);
+      o.start(now+offset);
+      o.stop(now+offset+dur+.015);
+    };
+    chirp(255,0,.055,.050);
+    chirp(365,.045,.065,.035);
+  }catch(_){}
+}
 function burst(){
   for(let i=0;i<14;i++)particles.push({x:bx,y:by,vx:(Math.random()-.5)*480,vy:(Math.random()-.5)*420-90,life:.5});
 }
@@ -180,7 +224,9 @@ function die(reason){
 function flap(){
   const gl=t<glitchUntil;
   bvy=(gl?(glitchInvert?Math.abs(FLAP)*.5:FLAP*.35):FLAP)*SCALE;
-  sonar=0;beep(gl?"glitch":"flap");
+  sonar=0;
+  playFlySfx();
+  if(gl) beep("glitch");
 }
 
 function showPause(){
@@ -306,7 +352,10 @@ function update(dt){
   const echo=bvy>=thresh();sonar+=dt;
   const speed=speedFor();
 
-  for(const p of pillars)p.x-=speed*dt;
+  for(const p of pillars){
+    p.x-=speed*dt;
+    p.moveSfxCooldown=Math.max(0,p.moveSfxCooldown-dt);
+  }
   while(pillars.length&&pillars[0].x<bx-230*SCALE)pillars.shift();
   maybeSpawn();
 
@@ -321,8 +370,15 @@ function update(dt){
       const base = p.jumpTime > 0 ? p.jumpTarget : p.center;
       const wobble = Math.sin(t*p.driftSpeed + p.driftPhase) * p.driftAmp;
       const desired = clampC(base + wobble, p.gap);
+      const delta = desired - p.center;
       // Smoothly follow the random target instead of teleporting every frame.
-      p.center += (desired - p.center) * Math.min(1, dt*5.5);
+      p.center += delta * Math.min(1, dt*5.5);
+
+      // Rock scrape/woosh when a visible pillar starts drifting.
+      if(Math.abs(delta)>3*SCALE && p.moveSfxCooldown<=0 && Math.abs(dx)<300*SCALE){
+        beep("move");
+        p.moveSfxCooldown=.18;
+      }
     }
 
     // Original-style fake-out #1: move the gap shortly before the bat reaches it.
@@ -336,6 +392,10 @@ function update(dt){
           p.gap
         );
         p.jumpTime=p.jumpDur;
+        if(p.moveSfxCooldown<=0){
+          beep("move");
+          p.moveSfxCooldown=.20;
+        }
       }
     }
 
@@ -350,6 +410,10 @@ function update(dt){
           p.gap
         );
         p.jumpTime=p.jumpDur;
+        if(p.moveSfxCooldown<=0){
+          beep("move");
+          p.moveSfxCooldown=.20;
+        }
       }
     }
 
